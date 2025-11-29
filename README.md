@@ -1,4 +1,4 @@
-## Hi there 👋
+YO HELLO GUY ĐÂY LÀ NƠI TÔI THỬ NGHIỆM CÁC SCRIPT CỦA TÔI
 
 <!--
 **Voidxroblox/VOIDXROBLOX** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
