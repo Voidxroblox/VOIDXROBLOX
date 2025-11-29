@@ -1,0 +1,243 @@
+-- 🎩 VOID_HUB - NEON GREEN GLOW EDITION
+-- By VOID_TEAM | Universal GUI 2025 | Auto Execute + Optimized
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TeleportService = game:GetService("TeleportService")
+
+-- === BẢO VỆ CORE GUI ===
+if not CoreGui then return end
+if getgenv().VOID_HUB_LOADED then return end
+getgenv().VOID_HUB_LOADED = true
+
+-- === AUTO EXEC ===
+pcall(function()
+    if writefile then
+        writefile("VOID_HUB_AUTOEXEC.txt", "loadstring(game:HttpGet('YOUR_RAW_GITHUB_LINK_HERE'))()")
+    end
+end)
+
+-- === INTRO VOID ===
+do
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.Parent = CoreGui
+    local Frame = Instance.new("Frame", ScreenGui)
+    Frame.Size = UDim2.new(0, 350, 0, 120)
+    Frame.Position = UDim2.new(0.5, -175, 0.5, -60)
+    Frame.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+    Frame.BackgroundTransparency = 0.1
+    Frame.BorderSizePixel = 0
+
+    local Title = Instance.new("TextLabel", Frame)
+    Title.Size = UDim2.new(1, 0, 1, 0)
+    Title.BackgroundTransparency = 1
+    Title.Text = "🎩 VOID_HUB Loading..."
+    Title.TextColor3 = Color3.fromRGB(0, 255, 100)
+    Title.Font = Enum.Font.GothamBold
+    Title.TextScaled = true
+
+    TweenService:Create(Frame, TweenInfo.new(1.2, Enum.EasingStyle.Sine), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(Title, TweenInfo.new(1.2, Enum.EasingStyle.Sine), {TextTransparency = 1}):Play()
+    task.delay(1.5, function() ScreenGui:Destroy() end)
+end
+
+-- === MAIN GUI ===
+local Gui = Instance.new("ScreenGui")
+Gui.Name = "VOID_HUB🎩"
+Gui.IgnoreGuiInset = true
+Gui.Parent = CoreGui
+
+local Main = Instance.new("Frame", Gui)
+Main.Size = UDim2.new(0, 400, 0, 300)
+Main.Position = UDim2.new(0.5, -200, 0.5, -150)
+Main.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Main.BorderSizePixel = 0
+Main.Active = true
+Main.Draggable = true
+
+local UICorner = Instance.new("UICorner", Main)
+UICorner.CornerRadius = UDim.new(0, 15)
+
+local UIStroke = Instance.new("UIStroke", Main)
+UIStroke.Thickness = 3
+UIStroke.Color = Color3.fromRGB(0, 255, 100)
+UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+-- Hiệu ứng neon
+task.spawn(function()
+    while Gui.Parent do
+        local t = tick() * 2
+        local pulse = math.sin(t) * 0.5 + 0.5
+        UIStroke.Thickness = 2 + pulse * 2
+        UIStroke.Color = Color3.fromRGB(0, 200 + pulse * 55, 80 + pulse * 40)
+        task.wait(0.05)
+    end
+end)
+
+-- Tiêu đề
+local Title = Instance.new("TextLabel", Main)
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundTransparency = 1
+Title.Text = "🎩 VOID_HUB | Neon Green Glow Edition"
+Title.TextColor3 = Color3.fromRGB(0, 255, 100)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 22
+
+-- Cuộn nội dung
+local Scroll = Instance.new("ScrollingFrame", Main)
+Scroll.Position = UDim2.new(0, 0, 0, 45)
+Scroll.Size = UDim2.new(1, 0, 1, -45)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+Scroll.BackgroundTransparency = 1
+Scroll.ScrollingDirection = Enum.ScrollingDirection.Y
+Scroll.ScrollBarThickness = 4
+
+-- Layout cho các nút
+local UIListLayout = Instance.new("UIListLayout", Scroll)
+UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+-- === HÀM TẠO NÚT ===
+local function AddButton(name, callback)
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(0.9, 0, 0, 40)
+    Button.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    Button.Text = name
+    Button.TextColor3 = Color3.fromRGB(0, 255, 100)
+    Button.Font = Enum.Font.GothamBold
+    Button.TextSize = 18
+    Button.Parent = Scroll
+
+    local UICorner = Instance.new("UICorner", Button)
+    local UIStroke = Instance.new("UIStroke", Button)
+    UIStroke.Thickness = 2
+    UIStroke.Color = Color3.fromRGB(0, 255, 100)
+
+    Button.MouseButton1Click:Connect(function()
+        pcall(callback)
+    end)
+
+    -- Cập nhật CanvasSize
+    Scroll.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+end
+
+-- === HÀM THÔNG BÁO NEON ===
+local function Notify(msg)
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.Parent = CoreGui
+    local Text = Instance.new("TextLabel", ScreenGui)
+    Text.Size = UDim2.new(0, 250, 0, 50)
+    Text.Position = UDim2.new(0.5, -125, 0.8, 0)
+    Text.BackgroundTransparency = 0.2
+    Text.BackgroundColor3 = Color3.fromRGB(0, 30, 0)
+    Text.TextColor3 = Color3.fromRGB(0, 255, 100)
+    Text.Text = msg
+    Text.Font = Enum.Font.GothamBold
+    Text.TextSize = 20
+    Text.ZIndex = 10
+
+    local Glow = Instance.new("UIStroke", Text)
+    Glow.Color = Color3.fromRGB(0, 255, 100)
+    Glow.Thickness = 2
+    local Corner = Instance.new("UICorner", Text)
+    Corner.CornerRadius = UDim.new(0, 10)
+
+    TweenService:Create(Text, TweenInfo.new(0.5), {BackgroundTransparency = 0.05}):Play()
+    task.delay(1.5, function()
+        TweenService:Create(Text, TweenInfo.new(1), {TextTransparency = 1, BackgroundTransparency = 1}):Play()
+        task.delay(1, function() ScreenGui:Destroy() end)
+    end)
+end
+
+-- === NÚT CHÍNH ===
+AddButton("🕊️ Fly", function()
+    Notify("Fly Đã Hoạt Động ✅")
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FLY-GUI-V3-19840"))()
+end)
+
+AddButton("💫 Infinite Jump", function()
+    Notify("💫 Infinite Jump ON")
+    local connection = UserInputService.JumpRequest:Connect(function()
+        if LocalPlayer.Character then
+            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+    getgenv().InfiniteJumpConnection = connection
+end)
+
+AddButton("🚫 Noclip", function()
+    Notify("🚫 Noclip Enabled")
+    getgenv().Noclip = not getgenv().Noclip
+    if getgenv().Noclip then
+        getgenv().NoclipConnection = RunService.Stepped:Connect(function()
+            if LocalPlayer.Character then
+                for _, v in pairs(LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then v.CanCollide = false end
+                end
+            end
+        end)
+    else
+        if getgenv().NoclipConnection then
+            getgenv().NoclipConnection:Disconnect()
+        end
+        Notify("🚫 Noclip Disabled")
+    end
+end)
+
+AddButton("⚙️ Reduce Lag", function()
+    Notify("⚙️ Lag Reduced")
+    for _, v in pairs(workspace:GetDescendants()) do
+        if v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Enabled = false
+        end
+    end
+    settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+end)
+
+AddButton("🌀 Infinite Yield (Admin Cmds)", function()
+    Notify("🌀 Infinite Yield Loaded")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+AddButton("🔁 Auto Rejoin", function()
+    Notify("🔁 Rejoining Server...")
+    TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+end)
+
+AddButton("🌐 Server Hop", function()
+    Notify("🌐 Hopping Server...")
+    loadstring(game:HttpGet("https://pastebin.com/raw/1gtVTgYF"))()
+end)
+
+AddButton("🧠 Anti AFK", function()
+    Notify("🧠 Anti AFK ON")
+    for _, v in pairs(getconnections(LocalPlayer.Idled)) do
+        v:Disable()
+    end
+end)
+
+-- === NÚT ẨN/HIỆN GUI ===
+local Toggle = Instance.new("TextButton", Gui)
+Toggle.Size = UDim2.new(0, 60, 0, 30)
+Toggle.Position = UDim2.new(0, 10, 0.5, -15)
+Toggle.Text = "≡"
+Toggle.TextColor3 = Color3.fromRGB(0, 255, 100)
+Toggle.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Toggle.Font = Enum.Font.GothamBold
+Toggle.TextSize = 22
+Toggle.Active = true
+Toggle.Draggable = true
+
+local UICornerToggle = Instance.new("UICorner", Toggle)
+UICornerToggle.CornerRadius = UDim.new(0, 8)
+
+Toggle.MouseButton1Click:Connect(function()
+    Main.Visible = not Main.Visible
+end)
