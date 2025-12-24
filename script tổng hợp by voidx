@@ -1,0 +1,283 @@
+-- VOIDX & grox Hub - Rayfield UI Version (Full Hub - Theme Amethyst - 24/12/2025)
+-- by voidx - Tất cả script mày gửi đã thêm, no key (trừ Ronix)
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "VOIDX & grox Hub",
+   LoadingTitle = "VOIDX & grox",
+   LoadingSubtitle = "by voidx",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "VOIDXgroxConfig",
+      FileName = "Settings"
+   },
+   KeySystem = false,
+   Theme = "Amethyst"  -- Theme tím neon đẹp lung linh
+})
+
+-- Tab Blox Fruits
+local BloxFruitsTab = Window:CreateTab("Blox Fruits", "apple")
+
+BloxFruitsTab:CreateButton({
+   Name = "QuantumOnyx",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Blue Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Night Hub (Trial)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/Trial.luau"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Hinishi Hub",
+   Callback = function()
+      getgenv().team = "Marines" -- Marines or Pirates
+      _G.Translate = "Vietnamese" -- Thai or Russian or Portuguese or Vietnamese
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/Freemium.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Ronix Hub (Có Key)",  -- Ghi rõ có key (Luarmor)
+   Callback = function()
+      loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Hinishi Kaitun",
+   Callback = function()
+      _G.Hinishi_Hub_Kaitun_Blox_Fruits = {
+         ["Misc"] = {
+            ["Hop If Admin Join"] = true,
+            ["Unlock Dough Chip"] = true,
+            ["Auto Aura RGB"] = true,
+            ["Auto Pull Lever"] = true,
+            ["Big Hitbox"] = true
+         },
+         ["Upgrade Race"] = {
+            ["Race"] = {"Human", "Fishman", "Skypiea", "Mink"},
+            ["Upgrade Race V3"] = true,
+            ["Lock Race Select"] = true
+         },
+         ["Fighting Styles"] = {
+            ["Melee V2"] = true,
+            ["Godhuman"] = true
+         },
+         ["Swords"] = {
+            ["True Triple Katana"] = true,
+            ["Cursed Dual Katana"] = true,
+            ["Shark Anchor"] = true,
+            ["Saber"] = true,
+            ["Midnight Blade"] = true,
+            ["Shisui"] = true,
+            ["Saddi"] = true,
+            ["Wando"] = true,
+            ["Yama"] = true,
+            ["Koko"] = false,
+            ["Rengoku"] = true,
+            ["Canvander"] = true,
+            ["Buddy Sword"] = true,
+            ["Twin Hooks"] = true,
+            ["Spikey Trident"] = true,
+            ["Hallow Scryte"] = true,
+            ["Dark Dagger"] = true,
+            ["Tushita"] = true
+         },
+         ["Guns"] = {
+            ["Soul Guitar"] = true,
+            ["Kabucha"] = true,
+            ["Acidum Rifle"] = true,
+            ["Serpent Bow"] = true
+         },
+         ["BloxFruits"] = {
+            ["Sub Fruits"] = {"Rocket-Rocket", "Spin-Spin"},
+            ["Safe Fruits"] = {"Dragon-Dragon", "T-Rex-T-Rex", "Kitsune-Kitsune"}
+         },
+         ["Mastery"] = {
+            ["Blox Fruit"] = true,
+            ["Fighting Styles"] = true,
+            ["Swords"] = true
+         },
+         ["Settings"] = {
+            ["Tween Speed"] = 300,
+            ["Fix Lag"] = true,
+            ["Safe Mode"] = false
+         }
+      }
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/Kaitun"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Gravity Kaitun",
+   Callback = function()
+      repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Kaitun.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Rise Hub",
+   Callback = function()
+      getgenv().Team = "Pirates" -- Marines or Pirates
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/TrashLua/BloxFruits/main/loadder.lua'))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Zee Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://zuwz.me/Ls-Zee-Hub"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Bacon Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh129150/hack/refs/heads/main/Bloxfruits.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Gravity Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()
+   end
+})
+
+BloxFruitsTab:CreateButton({
+   Name = "Rubu Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Bubu2k/Rubutv/refs/heads/main/rubuhubV5Y.lua"))()
+   end
+})
+
+-- Tab Aim / PVP
+local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
+
+AimTab:CreateButton({
+   Name = "PVP",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/ScriptkhanhlyHUB/refs/heads/main/bloxkidPVP"))()
+   end
+})
+
+-- Tab Auto Bounty
+local BountyTab = Window:CreateTab("Auto Bounty", "dollar-sign")
+
+BountyTab:CreateButton({
+   Name = "Auto Bounty (SeraHub)",
+   Callback = function()
+      getgenv().config = {
+         ["Team"] = "Pirates",
+         ["Use Race"] = true,
+         ["MinBountyHunt"] = 0,
+         ["MaxBountyHunt"] = 30000000,
+         ["SafeHealth"] = 4000
+      }
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/LumosSera/SeraHub/main/AutoBounty.lua"))()
+   end
+})
+
+BountyTab:CreateButton({
+   Name = "Teddy Bounty",
+   Callback = function()
+      repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+      getgenv().Setting = {
+         ["Team"] = "Pirates",
+         ["Skip Race V4"] = true,
+         ["Melee"] = {
+            ["Name Weapon"] = "",
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1.5
+         },
+         ["Sword"] = {
+            ["Name Weapon"] = "",
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Gun"] = {
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1,
+            ["GunMode"] = false
+         },
+         ["Fruit"] = {
+            ["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["V"] = {["Enable"] = false, ["HoldTime"] = 0.1},
+            ["F"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Hunt"] = {
+            ["Min"] = 0,
+            ["Max"] = 30000000
+         },
+         ["Skip"] = {
+            ["Fruit"] = false,
+            ["FruitList"] = {"Buddha", "Leopard", "T-Rex"},
+            ["SafeZone"] = true,
+            ["NoHaki"] = true,
+            ["NoPvP"] = true
+         },
+         ["SafeHealth"] = {
+            ["Health"] = 4700,
+            ["RaceV4"] = false
+         },
+         ["Another"] = {
+            ["V3"] = true,
+            ["V4"] = true,
+            ["CustomHealth"] = true,
+            ["Health"] = 4700,
+            ["WhiteScreen"] = false,
+            ["FPSBoots"] = false,
+         },
+         ["Webhook"] = {
+            ["Enabled"] = false,
+            ["Url"] = ""
+         }
+      }
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TeddyHub-BountyEzz.lua"))()
+   end
+})
+
+-- Tab Server Hop
+local HopTab = Window:CreateTab("Server Hop", "refresh-cw")
+
+HopTab:CreateButton({
+   Name = "Server Hop (VisionX Finder)",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/VisionX/refs/heads/main/Server_Finder.lua"))()
+   end
+})
+
+-- Notify khi load xong
+Rayfield:Notify({
+   Title = "VOIDX & grox Hub Loaded!",
+   Content = "Hub full no key (trừ Ronix có key). Theme Amethyst đẹp, chọn tab để chạy script. Test acc phụ nhé bro!",
+   Duration = 6.5,
+   Image = 4483362458
+})
+
+print("VOIDX & grox Hub Rayfield - Loaded by voidx! Full hub ready!")
