@@ -23,8 +23,6 @@ BloxFruitsTab:CreateButton({Name = "Gravity Hub", Callback = function() loadstri
 BloxFruitsTab:CreateButton({Name = "Rubu Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Bubu2k/Rubutv/refs/heads/main/rubuhubV5Y.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Cokka Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Hnc Chest", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; _G.AntiKick = true; _G.Team = "Marines"; _G.FpsBooster = true; _G.StopItems = false; _G.GetFruits = false; _G.HopServer = true; _G.HopTime = 150; _G.AutoJump = true; _G.ESPChests = false; _G.ESPFruits = true; _G.TweenMode = "TP"; loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/FarmChest.lua"))() end})
-BloxFruitsTab:CreateButton({Name = "Auto Farm Chest", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; getgenv().Settings = {JoinTeam = true, Team = "Marines"}; getgenv().StopItemChest = true; getgenv().WhiteScreen = false; getgenv().EspChest = false; getgenv().BoostFps = false; loadstring(game:HttpGet("https://raw.githubusercontent.com/KiddoHiru/BloxFruits/main/AutoChest.lua"))() end})
-BloxFruitsTab:CreateButton({Name = "Auto Only Chest", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; getgenv().Settings = {JoinTeam = true, Team = "Marines"}; getgenv().StopItemChest = false; getgenv().WhiteScreen = false; getgenv().EspChest = false; getgenv().BoostFps = false; loadstring(game:HttpGet("https://raw.githubusercontent.com/KiddoHiru/BloxFruits/main/AutoChest.lua"))() end})
 
 local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
 AimTab:CreateButton({Name = "PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/ScriptkhanhlyHUB/refs/heads/main/bloxkidPVP"))() end})
@@ -39,9 +37,9 @@ HopTab:CreateButton({Name = "Server Hop (VisionX Finder)", Callback = function()
 
 Rayfield:Notify({
 Title = "VOIDX Hub Loaded!",
-Content = "Đã thêm Auto Farm Chest vào Blox Fruits. Theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
+Content = "Đã xóa Auto Farm Chest, hub gọn gàng. Theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
 Duration = 6.5,
 Image = 4483362458
 })
 
-print("VOIDX Hub Rayfield - Loaded BY VOIDX! Auto Farm Chest đã thêm.")
+print("VOIDX Hub Rayfield - Loaded BY VOIDX! Full tabs.")
