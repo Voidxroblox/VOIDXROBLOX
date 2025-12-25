@@ -1,19 +1,19 @@
--- VOIDX & grox Hub - Rayfield UI Version (Full Hub - Theme Amethyst - 24/12/2025)
--- by voidx - Tất cả script mày gửi đã thêm, no key (trừ Ronix)
+-- VOIDX Hub - Rayfield UI Version (Full Hub - Theme Amethyst - 25/12/2025)
+-- BY VOIDX - Tất cả script đã thêm
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "VOIDX & grox Hub",
-   LoadingTitle = "VOIDX & grox",
-   LoadingSubtitle = "by voidx",
+   Name = "VOIDX Hub",
+   LoadingTitle = "VOIDX",
+   LoadingSubtitle = "BY VOIDX",
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = "VOIDXgroxConfig",
+      FolderName = "VOIDXConfig",
       FileName = "Settings"
    },
    KeySystem = false,
-   Theme = "Amethyst"  -- Theme tím neon đẹp lung linh
+   Theme = "Amethyst"  -- Theme tím neon đẹp
 })
 
 -- Tab Blox Fruits
@@ -50,7 +50,7 @@ BloxFruitsTab:CreateButton({
 })
 
 BloxFruitsTab:CreateButton({
-   Name = "Ronix Hub (Có Key)",  -- Ghi rõ có key (Luarmor)
+   Name = "Ronix Hub (Có Key)",
    Callback = function()
       loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))()
    end
@@ -165,6 +165,13 @@ BloxFruitsTab:CreateButton({
    end
 })
 
+BloxFruitsTab:CreateButton({
+   Name = "Cokka Hub",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
+   end
+})
+
 -- Tab Aim / PVP
 local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
 
@@ -262,6 +269,200 @@ BountyTab:CreateButton({
    end
 })
 
+-- Thêm God Hub Auto Bounty vào tab Auto Bounty
+BountyTab:CreateButton({
+   Name = "God Hub Auto Bounty",
+   Callback = function()
+      repeat wait() until game:IsLoaded()
+      getgenv().Setting = {
+         ["Team"] = "Pirates",
+         ["Chat"] = {},
+         ["Skip Race V4"] = true,
+         ["Melee"] = {
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1.5
+         },
+         ["Sword"] = {
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Gun"] = {
+            ["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1,
+            ["GunMode"] = false
+         },
+         ["Fruit"] = {
+            ["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["V"] = {["Enable"] = false, ["HoldTime"] = 0.1},
+            ["F"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Hunt"] = {
+            ["Min"] = 0,
+            ["Max"] = 30000000
+         },
+         ["Skip"] = {
+            ["Fruit"] = false,
+            ["FruitList"] = {"Buddha", "Leopard", "T-Rex"},
+            ["SafeZone"] = true,
+            ["NoHaki"] = true,
+            ["NoPvP"] = true
+         },
+         ["SafeHealth"] = {
+            ["Health"] = 4700,
+            ["Mask"] = false,
+            ["MaskType"] = "Mask",
+            ["RaceV4"] = false
+         },
+         ["Another"] = {
+            ["V3"] = true,
+            ["V4"] = true,
+            ["CustomHealth"] = true,
+            ["Health"] = 4700,
+            ["WhiteScreen"] = false,
+            ["FPSBoots"] = false,
+            ["AutoServerHop"] = true,
+            ["HopWhenNoBounty"] = true,
+            ["BountyLock"] = false,
+            ["BountyLockAt"] = 30000000,
+            ["ServerHopAfterTime"] = false,
+            ["ServerHopTime"] = 900,
+            ["CheckCombatBeforeHop"] = true,
+            ["MaxPlayersInServer"] = 8
+         },
+         ["Webhook"] = {
+            ["Enabled"] = true,
+            ["Url"] = ""
+         }
+      }
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/AutoBounty.lua"))()
+   end
+})
+
+-- Tab Auto Chest
+local AutoChestTab = Window:CreateTab("Auto Chest", "chest")
+
+AutoChestTab:CreateButton({
+   Name = "Auto Chest (KiddoHiru)",
+   Callback = function()
+      repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+      getgenv().Settings = {
+         JoinTeam = true,
+         Team = "Marines" -- Pirates or Marines
+      }
+      getgenv().StopItemChest = true
+      getgenv().WhiteScreen = false
+      getgenv().EspChest = false
+      getgenv().BoostFps = false
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/KiddoHiru/BloxFruits/main/AutoChest.lua"))()
+   end
+})
+
+AutoChestTab:CreateButton({
+   Name = "Hnc Chest",
+   Callback = function()
+      repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+      getgenv().Settings = {
+         ["Team"] = "Pirates",
+         ["Chat"] = {},
+         ["Skip Race V4"] = true,
+         ["Melee"] = {
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1.5
+         },
+         ["Sword"] = {
+            ["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Gun"] = {
+            ["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1,
+            ["GunMode"] = false
+         },
+         ["Fruit"] = {
+            ["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["V"] = {["Enable"] = false, ["HoldTime"] = 0.1},
+            ["F"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+            ["Delay"] = 1
+         },
+         ["Hunt"] = {
+            ["Min"] = 0,
+            ["Max"] = 30000000
+         },
+         ["Skip"] = {
+            ["Fruit"] = false,
+            ["FruitList"] = {"Buddha", "Leopard", "T-Rex"},
+            ["SafeZone"] = true,
+            ["NoHaki"] = true,
+            ["NoPvP"] = true
+         },
+         ["SafeHealth"] = {
+            ["Health"] = 4700,
+            ["Mask"] = false,
+            ["MaskType"] = "Mask",
+            ["RaceV4"] = false
+         },
+         ["Another"] = {
+            ["V3"] = true,
+            ["V4"] = true,
+            ["CustomHealth"] = true,
+            ["Health"] = 4700,
+            ["WhiteScreen"] = false,
+            ["FPSBoots"] = false,
+            ["AutoServerHop"] = true,
+            ["HopWhenNoBounty"] = true,
+            ["BountyLock"] = false,
+            ["BountyLockAt"] = 30000000,
+            ["ServerHopAfterTime"] = false,
+            ["ServerHopTime"] = 900,
+            ["CheckCombatBeforeHop"] = true,
+            ["MaxPlayersInServer"] = 8
+         },
+         ["Webhook"] = {
+            ["Enabled"] = true,
+            ["Url"] = ""
+         }
+      }
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/AutoBounty.lua"))()
+   end
+})
+
+AutoChestTab:CreateButton({
+   Name = "Hnc Chest",
+   Callback = function()
+      repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+      getgenv().Settings = {
+         JoinTeam = true,
+         Team = "Marines" -- Pirates or Marines
+      }
+      getgenv().StopItemChest = true
+      getgenv().WhiteScreen = false
+      getgenv().EspChest = false
+      getgenv().BoostFps = false
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/KiddoHiru/BloxFruits/main/AutoChest.lua"))()
+   end
+})
+
 -- Tab Server Hop
 local HopTab = Window:CreateTab("Server Hop", "refresh-cw")
 
@@ -274,10 +475,10 @@ HopTab:CreateButton({
 
 -- Notify khi load xong
 Rayfield:Notify({
-   Title = "VOIDX & grox Hub Loaded!",
-   Content = "Hub full no key (trừ Ronix có key). Theme Amethyst đẹp, chọn tab để chạy script. Test acc phụ nhé bro!",
+   Title = "VOIDX Hub Loaded!",
+   Content = "Đã thêm Hnc Chest vào tab Auto Chest. Theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
    Duration = 6.5,
    Image = 4483362458
 })
 
-print("VOIDX & grox Hub Rayfield - Loaded by voidx! Full hub ready!")
+print("VOIDX Hub Rayfield - Loaded BY VOIDX! Hnc Chest đã thêm.")
