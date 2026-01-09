@@ -31,7 +31,7 @@ BloxFruitsTab:CreateButton({Name = "khanhlyautochest", Callback = function() loa
 -- Tab Aim / PVP
 local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
 AimTab:CreateButton({Name = "PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/ScriptkhanhlyHUB/refs/heads/main/bloxkidPVP"))() end})
-AimTab:CreateButton({Name = "CentuDoxhub PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/CentuDox-Hub-Paradoz-Hub/refs/heads/main/CentuDox%20Aimbot.xyz", true))()
+AimTab:CreateButton({Name = "CentuDoxhub PVP (Key phải tự get)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/CentuDox-Hub-Paradoz-Hub/refs/heads/main/CentuDox%20Aimbot.xyz"))() end})
 
 -- Tab Auto Bounty
 local BountyTab = Window:CreateTab("Auto Bounty", "dollar-sign")
@@ -44,9 +44,9 @@ HopTab:CreateButton({Name = "Server Hop (VisionX Finder)", Callback = function()
 
 Rayfield:Notify({
 Title = "VOIDX Hub Loaded!",
-Content = "Hub full hoàn chỉnh, theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
+Content = "Đã update CentuDoxhub PVP (Key phải tự get). Theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
 Duration = 6.5,
 Image = 4483362458
 })
 
-print("VOIDX Hub Rayfield - Loaded BY VOIDX! Full hub ready.")
+print("VOIDX Hub Rayfield - Loaded BY VOIDX! CentuDoxhub PVP update với key tự get.")
