@@ -31,7 +31,7 @@ BloxFruitsTab:CreateButton({Name = "khanhlyautochest", Callback = function() loa
 -- Tab Aim / PVP
 local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
 AimTab:CreateButton({Name = "PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/ScriptkhanhlyHUB/refs/heads/main/bloxkidPVP"))() end})
-AimTab:CreateButton({Name = "CentuDoxhub PVP (Key: tIljtIJltIjltjtiljtIltjitjft)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/CentuDox-Hub-Paradoz-Hub/refs/heads/main/CentuDox.xyz"))() end})
+AimTab:CreateButton({Name = "CentuDoxhub PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/CentuDox-Hub-Paradoz-Hub/refs/heads/main/CentuDox%20Aimbot.xyz", true))()
 
 -- Tab Auto Bounty
 local BountyTab = Window:CreateTab("Auto Bounty", "dollar-sign")
