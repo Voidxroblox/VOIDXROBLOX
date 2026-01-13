@@ -1,12 +1,12 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-Name = "VOIDX Hub",
-LoadingTitle = "VOIDX",
-LoadingSubtitle = "BY VOIDX",
-ConfigurationSaving = {Enabled = true, FolderName = "VOIDXConfig", FileName = "Settings"},
-KeySystem = false,
-Theme = "Amethyst"
+   Name = "VOIDX Hub",
+   LoadingTitle = "VOIDX",
+   LoadingSubtitle = "BY VOIDX",
+   ConfigurationSaving = {Enabled = true, FolderName = "VOIDXConfig", FileName = "Settings"},
+   KeySystem = false,
+   Theme = "Amethyst"
 })
 
 -- Tab Blox Fruits
@@ -18,20 +18,31 @@ BloxFruitsTab:CreateButton({Name = "Hinishi Hub", Callback = function() getgenv(
 BloxFruitsTab:CreateButton({Name = "Ronix Hub (Có Key)", Callback = function() loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/fda9babd071d6b536a745774b6bc681c.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Hinishi Kaitun", Callback = function() _G.Hinishi_Hub_Kaitun_Blox_Fruits = {["Misc"]={["Hop If Admin Join"]=true,["Unlock Dough Chip"]=true,["Auto Aura RGB"]=true,["Auto Pull Lever"]=true,["Big Hitbox"]=true},["Upgrade Race"]={["Race"]={"Human","Fishman","Skypiea","Mink"},["Upgrade Race V3"]=true,["Lock Race Select"]=true},["Fighting Styles"]={["Melee V2"]=true,["Godhuman"]=true},["Swords"]={["True Triple Katana"]=true,["Cursed Dual Katana"]=true,["Shark Anchor"]=true,["Saber"]=true,["Midnight Blade"]=true,["Shisui"]=true,["Saddi"]=true,["Wando"]=true,["Yama"]=true,["Koko"]=false,["Rengoku"]=true,["Canvander"]=true,["Buddy Sword"]=true,["Twin Hooks"]=true,["Spikey Trident"]=true,["Hallow Scryte"]=true,["Dark Dagger"]=true,["Tushita"]=true},["Guns"]={["Soul Guitar"]=true,["Kabucha"]=true,["Acidum Rifle"]=true,["Serpent Bow"]=true},["BloxFruits"]={["Sub Fruits"]={"Rocket-Rocket","Spin-Spin"},["Safe Fruits"]={"Dragon-Dragon","T-Rex-T-Rex","Kitsune-Kitsune"}},["Mastery"]={["Blox Fruit"]=true,["Fighting Styles"]=true,["Swords"]=true},["Settings"]={["Tween Speed"]=300,["Fix Lag"]=true,["Safe Mode"]=false}}; loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/Kaitun"))() end})
 BloxFruitsTab:CreateButton({Name = "Gravity Kaitun", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Kaitun.lua"))() end})
-BloxFruitsTab:CreateButton({Name = "Rise Hub", Callback = function() getgenv().Team = "Pirates"; loadstring(game:HttpGet('https://raw.githubusercontent.com/TrashLua/BloxFruits/main/loadder.lua'))() end})
+BloxFruitsTab:CreateButton({Name = "Rise Hub", Callback = function() getgenv().Team = "Marines"; loadstring(game:HttpGet('https://raw.githubusercontent.com/asher-realrise/project/refs/heads/main/loadder.lua'))() end})
 BloxFruitsTab:CreateButton({Name = "Zee Hub", Callback = function() loadstring(game:HttpGet("https://zuwz.me/Ls-Zee-Hub"))() end})
 BloxFruitsTab:CreateButton({Name = "Bacon Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/vinh129150/hack/refs/heads/main/Bloxfruits.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Gravity Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))() end})
-BloxFruitsTab:CreateButton({Name = "Rubu Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Bubu2k/Rubutv/refs/heads/main/rubuhubV5Y.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "Rubu Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Bubu2k/Rubutv/refs/heads/main/Rubu-obfuscated%202.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Cokka Hub (Có Key)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Redz Hub Remake by OMG Hub (Có Key)", Callback = function() loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/20f318386e3fbf069ee3fa797cfc9f34.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "Hnc Chest", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; _G.AntiKick = true; _G.Team = "Marines"; _G.FpsBooster = true; _G.StopItems = false; _G.GetFruits = false; _G.HopServer = true; _G.HopTime = 150; _G.AutoJump = true; _G.ESPChests = false; _G.ESPFruits = true; _G.TweenMode = "TP"; loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/FarmChest.lua"))() end})
 BloxFruitsTab:CreateButton({Name = "khanhlyautochest", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/khanhlyHUB/refs/heads/main/Farm%20chest%20pranium"))() end})
+BloxFruitsTab:CreateButton({Name = "HNTL_Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/q8ta0e/source/main/HNTL_Hub_BF.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "Hiru Hub", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; loadstring(game:HttpGet("https://luacrack.site/raw.php/HiruHub/raw/Loader/HiruHubFree.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "King Rua Hub", Callback = function() repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer; loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinyeuem/refs/heads/main/KingRuaHub.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "Xova Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/sofziol1fe/Script/refs/heads/main/main.luau"))() end})
+BloxFruitsTab:CreateButton({Name = "NHT Hub", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; getgenv().Team = "Pirates"; loadstring(game:HttpGet("https://raw.githubusercontent.com/trongdeptraihucscript/Main/refs/heads/main/Hoangtrongdepzai.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "Leaf Hub", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; loadstring(game:HttpGet("https://leaf-zeta.onrender.com/api/script"))() end})
+BloxFruitsTab:CreateButton({Name = "Meoxhub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/VanHoangIOS/MeoXHub/refs/heads/main/Main.lua"))() end})
+BloxFruitsTab:CreateButton({Name = "Chicken Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/DevHub-roblox/script-Chicken-Hub/refs/heads/main/game/BloxFruit/main.lua"))() end})
 
 -- Tab Aim / PVP
 local AimTab = Window:CreateTab("Aim / PVP", "crosshair")
 AimTab:CreateButton({Name = "PVP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/khoavipok/ScriptkhanhlyHUB/refs/heads/main/bloxkidPVP"))() end})
 AimTab:CreateButton({Name = "CentuDoxhub PVP (Key phải tự get)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/CentuDox-Hub-Paradoz-Hub/refs/heads/main/CentuDox%20Aimbot.xyz"))() end})
+AimTab:CreateButton({Name = "script pvp by onion13", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/onion132005-bit/v3/refs/heads/main/onion13v3.lua"))() end})
+AimTab:CreateButton({Name = "Catt PVP", Callback = function() loadstring(game:HttpGet("https://catt-star-aimbot-delta.vercel.app/api/aimbot"))() end})
+AimTab:CreateButton({Name = "Hermanos PVP", Callback = function() local script_mode = "PVP"; loadstring(game:HttpGet("https://raw.githubusercontent.com/hermanos-dev/hermanos-hub/refs/heads/main/Loader.lua"))() end})
 
 -- Tab Auto Bounty
 local BountyTab = Window:CreateTab("Auto Bounty", "dollar-sign")
@@ -39,14 +50,15 @@ BountyTab:CreateButton({Name = "Auto Bounty (SeraHub) (Có Key)", Callback = fun
 BountyTab:CreateButton({Name = "Teddy Bounty", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; getgenv().Setting = {["Team"]="Pirates",["Skip Race V4"]=true,["Melee"]={["Name Weapon"]="",["Enable"]=true,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["C"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1.5},["Sword"]={["Name Weapon"]="",["Enable"]=true,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1},["Gun"]={["Enable"]=true,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1,["GunMode"]=false},["Fruit"]={["Enable"]=false,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["C"]={["Enable"]=true,["HoldTime"]=0.1},["V"]={["Enable"]=false,["HoldTime"]=0.1},["F"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1},["Hunt"]={["Min"]=0,["Max"]=30000000},["Skip"]={["Fruit"]=false,["FruitList"]={"Buddha","Leopard","T-Rex"},["SafeZone"]=true,["NoHaki"]=true,["NoPvP"]=true},["SafeHealth"]={["Health"]=4700,["RaceV4"]=false},["Another"]={["V3"]=true,["V4"]=true,["CustomHealth"]=true,["Health"]=4700,["WhiteScreen"]=false,["FPSBoots"]=false},["Webhook"]={["Enabled"]=false,["Url"]=""} }; loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TeddyHub-BountyEzz.lua"))() end})
 BountyTab:CreateButton({Name = "God Hub Auto Bounty", Callback = function() repeat wait() until game:IsLoaded(); getgenv().Setting = {["Team"]="Pirates",["Chat"]={},["Skip Race V4"]=true,["Melee"]={["Enable"]=true,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["C"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1.5},["Sword"]={["Enable"]=true,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1},["Gun"]={["Enable"]=false,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1,["GunMode"]=false},["Fruit"]={["Enable"]=false,["Z"]={["Enable"]=true,["HoldTime"]=0.1},["X"]={["Enable"]=true,["HoldTime"]=0.1},["C"]={["Enable"]=true,["HoldTime"]=0.1},["V"]={["Enable"]=false,["HoldTime"]=0.1},["F"]={["Enable"]=true,["HoldTime"]=0.1},["Delay"]=1},["Hunt"]={["Min"]=0,["Max"]=30000000},["Skip"]={["Fruit"]=false,["FruitList"]={"Buddha","Leopard","T-Rex"},["SafeZone"]=true,["NoHaki"]=true,["NoPvP"]=true},["SafeHealth"]={["Health"]=4700,["Mask"]=false,["MaskType"]="Mask",["RaceV4"]=false},["Another"]={["V3"]=true,["V4"]=true,["CustomHealth"]=true,["Health"]=4700,["WhiteScreen"]=false,["FPSBoots"]=false,["AutoServerHop"]=true,["HopWhenNoBounty"]=true,["BountyLock"]=false,["BountyLockAt"]=30000000,["ServerHopAfterTime"]=false,["ServerHopTime"]=900,["CheckCombatBeforeHop"]=true,["MaxPlayersInServer"]=8},["Webhook"]={["Enabled"]=true,["Url"]=""} }; loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/AutoBounty.lua"))() end})
 
+-- Tab Server Hop
 local HopTab = Window:CreateTab("Server Hop", "refresh-cw")
 HopTab:CreateButton({Name = "Server Hop (VisionX Finder)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/VisionX/refs/heads/main/Server_Finder.lua"))() end})
 
 Rayfield:Notify({
 Title = "VOIDX Hub Loaded!",
-Content = "Đã update CentuDoxhub PVP (Key phải tự get). Theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
+Content = "Hub full hoàn chỉnh, theme Amethyst đẹp, BY VOIDX! Chọn tab để chạy script. Test acc phụ nhé!",
 Duration = 6.5,
 Image = 4483362458
 })
 
-print("VOIDX Hub Rayfield - Loaded BY VOIDX! CentuDoxhub PVP update với key tự get.")
+print("VOIDX Hub Rayfield - Loaded BY VOIDX! Full hub ready.")
