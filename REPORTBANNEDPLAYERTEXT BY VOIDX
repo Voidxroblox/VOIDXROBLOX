@@ -1,0 +1,296 @@
+-- ESP Highlight NEON + Name Tag + Report Text Copy (giống ảnh + DRAGGABLE + SCROLLABLE)
+-- Highlight neon xanh dương (có thể đổi màu)
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local StarterGui = game:GetService("StarterGui")
+local localPlayer = Players.LocalPlayer
+
+-- PHẦN ESP + NAME TAG (NEON)
+
+local espTable = {}
+
+local NEON_FILL = Color3.fromRGB(0, 255, 255)      -- Neon xanh dương
+local NEON_OUTLINE = Color3.fromRGB(0, 200, 255)   -- Viền neon sáng hơn
+local FILL_TRANS = 0.4                             -- Trong hơn để neon đẹp
+local OUTLINE_TRANS = 0
+
+local function createESP(character)
+    if not character or not character:FindFirstChild("Head") or not character:FindFirstChild("Humanoid") then return end
+    
+    local player = Players:GetPlayerFromCharacter(character)
+    if not player or player == localPlayer then return end
+    
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ESPHighlight"
+    highlight.FillColor = NEON_FILL
+    highlight.OutlineColor = NEON_OUTLINE
+    highlight.FillTransparency = FILL_TRANS
+    highlight.OutlineTransparency = OUTLINE_TRANS
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.Parent = character
+    
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "ESPNameTag"
+    billboard.Adornee = character:WaitForChild("Head")
+    billboard.Size = UDim2.new(0, 220, 0, 50)
+    billboard.StudsOffset = Vector3.new(0, 3.8, 0)
+    billboard.AlwaysOnTop = true
+    billboard.LightInfluence = 0
+    billboard.MaxDistance = 600
+    billboard.Parent = character.Head
+    
+    local text = Instance.new("TextLabel")
+    text.Size = UDim2.new(1, 0, 1, 0)
+    text.BackgroundTransparency = 1
+    text.TextColor3 = Color3.new(1, 1, 1)
+    text.TextStrokeTransparency = 0.4
+    text.TextStrokeColor3 = Color3.new(0, 0, 0)
+    text.Font = Enum.Font.SourceSansBold
+    text.TextSize = 18
+    text.TextWrapped = true
+    text.Parent = billboard
+    
+    espTable[player] = {highlight = highlight, billboard = billboard, textLabel = text}
+end
+
+local function updateNameTag(player, espData)
+    if not espData or not espData.textLabel then return end
+    
+    local char = player.Character
+    if not char or not char:FindFirstChild("Humanoid") or not char:FindFirstChild("Head") then
+        espData.textLabel.Text = player.Name .. " [Chết]"
+        return
+    end
+    
+    local humanoid = char.Humanoid
+    local headPos = char.Head.Position
+    local rootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local distance = rootPart and (headPos - rootPart.Position).Magnitude or 0
+    
+    local hp = math.floor(humanoid.Health)
+    local maxHp = humanoid.MaxHealth
+    local hpText = (hp > 0) and tostring(hp) .. "/" .. tostring(maxHp) or "Chết"
+    
+    espData.textLabel.Text = player.Name .. " [" .. math.floor(distance) .. " studs] ❤️ " .. hpText
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    if player.Character then createESP(player.Character) end
+    player.CharacterAdded:Connect(createESP)
+end
+
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(createESP)
+end)
+
+RunService.RenderStepped:Connect(function()
+    for player, esp in pairs(espTable) do
+        if player and esp then updateNameTag(player, esp) end
+    end
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+    if espTable[player] then
+        if espTable[player].highlight then espTable[player].highlight:Destroy() end
+        if espTable[player].billboard then espTable[player].billboard:Destroy() end
+        espTable[player] = nil
+    end
+end)
+
+-- PHẦN GUI + SCROLLINGFRAME + DRAGGABLE (giữ nguyên)
+
+local sg = Instance.new("ScreenGui")
+sg.Name = "ReportHelper"
+sg.ResetOnSpawn = false
+sg.Parent = game.CoreGui
+
+local toggleBtn = Instance.new("TextButton")
+toggleBtn.Size = UDim2.new(0, 80, 0, 80)
+toggleBtn.Position = UDim2.new(0, 20, 0.5, -40)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+toggleBtn.Text = "Report\nText"
+toggleBtn.TextColor3 = Color3.new(1,1,1)
+toggleBtn.Font = Enum.Font.SourceSansBold
+toggleBtn.TextSize = 18
+toggleBtn.TextWrapped = true
+toggleBtn.BorderSizePixel = 0
+toggleBtn.Parent = sg
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(1, 0)
+corner.Parent = toggleBtn
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 340, 0, 520)
+frame.Position = UDim2.new(0.5, -170, 0.5, -260)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.Visible = false
+frame.Parent = sg
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1,0,0,40)
+title.Text = "Copy Report Text"
+title.BackgroundColor3 = Color3.fromRGB(50,50,50)
+title.TextColor3 = Color3.new(1,1,1)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 22
+title.Parent = frame
+
+local bio = Instance.new("TextLabel", frame)
+bio.Size = UDim2.new(0.9, 0, 0, 160)
+bio.Position = UDim2.new(0.05, 0, 0, 45)
+bio.BackgroundTransparency = 1
+bio.TextColor3 = Color3.fromRGB(220, 220, 220)
+bio.TextStrokeTransparency = 0.8
+bio.TextStrokeColor3 = Color3.new(0,0,0)
+bio.Font = Enum.Font.SourceSans
+bio.TextSize = 14
+bio.TextWrapped = true
+bio.TextXAlignment = Enum.TextXAlignment.Left
+bio.TextYAlignment = Enum.TextYAlignment.Top
+bio.Text = [[Hướng dẫn report bằng tô sáng:
+
+Bước 1: Bấm vào logo Roblox bên trái trên góc màn hình
+
+Bước 2: Bấm vào Báo cáo
+
+Bước 3: Chọn chế độ tô sáng rồi chọn người muốn report
+(Dùng highlight neon + tên trên đầu để dễ nhận diện sus player)
+
+Bước 4: Nhớ phải đúng hành vi sai là bị banned ngược lại đừng có kêu
+(Chọn reason chính xác dựa trên vi phạm thật)
+
+Bước 5: Chọn text tương ứng với hành vi rồi report
+(Copy từ nút dưới đây, paste vào Description, thêm chi tiết nếu có)]]
+bio.Parent = frame
+
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Size = UDim2.new(0.9, 0, 0, 300)
+scrollFrame.Position = UDim2.new(0.05, 0, 0, 210)
+scrollFrame.BackgroundTransparency = 1
+scrollFrame.BorderSizePixel = 0
+scrollFrame.ScrollBarThickness = 8
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.Parent = frame
+
+local uiListLayout = Instance.new("UIListLayout")
+uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+uiListLayout.Padding = UDim.new(0, 10)
+uiListLayout.Parent = scrollFrame
+
+local templates = {
+    {"Avatar 18+ / Suggestive", "player dengan avatarus\nThis player is using an inappropriate avatar that is not suitable for\nCOPY"},
+    {"Avatar Suggestive for Kids", "I am reporting this player having a suggestive avatar for kids\nRoblox's avatar appears inappropriate and makes the game\nCOPY"},
+    {"Avatar Unsuitable", "This player's avatar appears inappropriate and makes the game unsuitable for younger players\nCOPY"},
+    {"Cheating / Exploit", "player yang memakai cheat\nI am reporting this player for suspected exploiting, including movement and gameplay\nCOPY"},
+    {"Cheating Unfair", "This player is cheating by using exploits to gain an unfair advantage\nCOPY"},
+    {"Cheating Fake Fairplay", "This player appears to be faking fairplay, using hacks, exploits, and third-party tools\nCOPY"},
+    {"Toxic Language", "This player is using toxic and insulting language in the chat\nCOPY"},
+    {"Spam / Repetitive Messages", "This user is spamming very repetitive messages and rude\nCOPY"},
+    {"Offensive Chat", "This player uses offensive words and provocative arguments\nCOPY"},
+    {"Harassment / Threats", "This player often uses threats, harassment and verbal abuse in the chat\nCOPY"},
+    {"Dating / Pacaran", "dating/pacaran\nThis player is engaging in dating/pacaran and making others uncomfortable\nCOPY"},
+    {"Grooming / Inappropriate Dating", "This player is engaging in inappropriate dating and grooming behavior and is inappropriate for the game\nCOPY"}
+}
+
+local totalHeight = 0
+for i, data in ipairs(templates) do
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0, 60)
+    btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    btn.Text = data[1] .. "\n" .. data[2]
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.Font = Enum.Font.SourceSans
+    btn.TextSize = 14
+    btn.TextWrapped = true
+    btn.TextXAlignment = Enum.TextXAlignment.Left
+    btn.Parent = scrollFrame
+
+    local btnCorner = Instance.new("UICorner", btn)
+    btnCorner.CornerRadius = UDim.new(0, 8)
+
+    btn.Activated:Connect(function()
+        local fullText = data[2]
+        if setclipboard then
+            setclipboard(fullText)
+            StarterGui:SetCore("SendNotification", {Title = "Copied!", Text = "Đã copy text, paste vào report.", Duration = 5})
+        else
+            StarterGui:SetCore("SendNotification", {Title = "Copy thủ công", Text = fullText, Duration = 12})
+        end
+    end)
+
+    totalHeight = totalHeight + 70
+end
+
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight + 20)
+
+-- Toggle GUI
+local function toggleGUI()
+    frame.Visible = not frame.Visible
+    if frame.Visible then
+        toggleBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+        toggleBtn.Text = "Close"
+    else
+        toggleBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+        toggleBtn.Text = "Report\nText"
+    end
+end
+
+toggleBtn.Activated:Connect(toggleGUI)
+
+UserInputService.InputBegan:Connect(function(input, gProcessed)
+    if gProcessed then return end
+    if input.KeyCode == Enum.KeyCode.Insert then
+        toggleGUI()
+    end
+end)
+
+-- DRAGGABLE (giữ nguyên)
+
+local dragging, dragInput, dragStart, startPos
+
+local function updateInput(input)
+    local delta = input.Position - dragStart
+    local newPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    dragging.Parent.Position = newPos
+end
+
+local function startDrag(input, gui)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = gui
+        dragStart = input.Position
+        startPos = gui.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = nil
+            end
+        end)
+    end
+end
+
+toggleBtn.InputBegan:Connect(function(input)
+    startDrag(input, toggleBtn)
+end)
+
+title.InputBegan:Connect(function(input)
+    startDrag(input, frame)
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+RunService.RenderStepped:Connect(function()
+    if dragging and dragInput then
+        updateInput(dragInput)
+    end
+end)
+
+frame.Visible = false
+print("Loaded: ESP NEON xanh dương + Report Text Copy (giống ảnh) + DRAGGABLE + SCROLLABLE")
