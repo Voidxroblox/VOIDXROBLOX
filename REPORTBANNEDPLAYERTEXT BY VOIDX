@@ -1,5 +1,5 @@
--- ESP Highlight NEON + Name Tag + Report Text Copy (giống ảnh + DRAGGABLE + SCROLLABLE)
--- Highlight neon xanh dương (có thể đổi màu)
+-- ESP NEON + Name Tag + Report Text Copy (giống ảnh + DRAGGABLE + SCROLLABLE + TOGGLE ESP bằng phím F)
+-- Nhấn F để bật/tắt ESP | Inject với executor
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -7,16 +7,17 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 local localPlayer = Players.LocalPlayer
 
--- PHẦN ESP + NAME TAG (NEON)
-
+-- ESP Settings (Neon xanh dương)
+local espEnabled = true  -- Bắt đầu bật
 local espTable = {}
 
-local NEON_FILL = Color3.fromRGB(0, 255, 255)      -- Neon xanh dương
-local NEON_OUTLINE = Color3.fromRGB(0, 200, 255)   -- Viền neon sáng hơn
-local FILL_TRANS = 0.4                             -- Trong hơn để neon đẹp
+local NEON_FILL = Color3.fromRGB(0, 255, 255)
+local NEON_OUTLINE = Color3.fromRGB(0, 200, 255)
+local FILL_TRANS = 0.4
 local OUTLINE_TRANS = 0
 
 local function createESP(character)
+    if not espEnabled then return end
     if not character or not character:FindFirstChild("Head") or not character:FindFirstChild("Humanoid") then return end
     
     local player = Players:GetPlayerFromCharacter(character)
@@ -55,8 +56,16 @@ local function createESP(character)
     espTable[player] = {highlight = highlight, billboard = billboard, textLabel = text}
 end
 
+local function removeESP()
+    for player, esp in pairs(espTable) do
+        if esp.highlight then esp.highlight:Destroy() end
+        if esp.billboard then esp.billboard:Destroy() end
+    end
+    espTable = {}
+end
+
 local function updateNameTag(player, espData)
-    if not espData or not espData.textLabel then return end
+    if not espEnabled or not espData or not espData.textLabel then return end
     
     local char = player.Character
     if not char or not char:FindFirstChild("Humanoid") or not char:FindFirstChild("Head") then
@@ -76,30 +85,51 @@ local function updateNameTag(player, espData)
     espData.textLabel.Text = player.Name .. " [" .. math.floor(distance) .. " studs] ❤️ " .. hpText
 end
 
-for _, player in ipairs(Players:GetPlayers()) do
-    if player.Character then createESP(player.Character) end
-    player.CharacterAdded:Connect(createESP)
+-- Áp dụng ESP khi bật
+local function refreshESP()
+    removeESP()
+    if not espEnabled then return end
+    
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Character then createESP(player.Character) end
+        player.CharacterAdded:Connect(function(char)
+            if espEnabled then createESP(char) end
+        end)
+    end
 end
 
-Players.PlayerAdded:Connect(function(player)
-    player.CharacterAdded:Connect(createESP)
-end)
+refreshESP()
 
 RunService.RenderStepped:Connect(function()
-    for player, esp in pairs(espTable) do
-        if player and esp then updateNameTag(player, esp) end
+    if espEnabled then
+        for player, esp in pairs(espTable) do
+            if player and esp then updateNameTag(player, esp) end
+        end
     end
 end)
 
-Players.PlayerRemoving:Connect(function(player)
-    if espTable[player] then
-        if espTable[player].highlight then espTable[player].highlight:Destroy() end
-        if espTable[player].billboard then espTable[player].billboard:Destroy() end
-        espTable[player] = nil
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(char)
+        if espEnabled then createESP(char) end
+    end)
+end)
+
+-- Toggle ESP bằng phím F
+UserInputService.InputBegan:Connect(function(input, gProcessed)
+    if gProcessed then return end
+    if input.KeyCode == Enum.KeyCode.F then
+        espEnabled = not espEnabled
+        if espEnabled then
+            refreshESP()
+            StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "Bật ESP Neon", Duration = 3})
+        else
+            removeESP()
+            StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "Tắt ESP", Duration = 3})
+        end
     end
 end)
 
--- PHẦN GUI + SCROLLINGFRAME + DRAGGABLE (giữ nguyên)
+-- PHẦN GUI COPY TEXT (giữ nguyên, có scroll + drag)
 
 local sg = Instance.new("ScreenGui")
 sg.Name = "ReportHelper"
@@ -227,7 +257,7 @@ end
 
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight + 20)
 
--- Toggle GUI
+-- Toggle GUI (menu copy text)
 local function toggleGUI()
     frame.Visible = not frame.Visible
     if frame.Visible then
@@ -248,8 +278,7 @@ UserInputService.InputBegan:Connect(function(input, gProcessed)
     end
 end)
 
--- DRAGGABLE (giữ nguyên)
-
+-- DRAGGABLE
 local dragging, dragInput, dragStart, startPos
 
 local function updateInput(input)
@@ -293,4 +322,4 @@ RunService.RenderStepped:Connect(function()
 end)
 
 frame.Visible = false
-print("Loaded: ESP NEON xanh dương + Report Text Copy (giống ảnh) + DRAGGABLE + SCROLLABLE")
+print("Loaded: ESP NEON (toggle bằng F) + Report Text Copy (giống ảnh) + DRAGGABLE + SCROLLABLE")
