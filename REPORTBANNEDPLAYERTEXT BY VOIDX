@@ -1,5 +1,5 @@
--- ESP NEON + Name Tag + Report Text Copy (giống ảnh + DRAGGABLE + SCROLLABLE + TOGGLE ESP bằng phím F)
--- Nhấn F để bật/tắt ESP | Inject với executor
+-- ESP NEON + Name Tag + Report Text Copy (giống ảnh + DRAGGABLE + SCROLLABLE + TOGGLE ESP bằng F hoặc nút + RESET POSITION)
+-- Kéo nút xanh hoặc title bar để di chuyển GUI | Nhấn nút "Reset Position" để về giữa màn hình
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -8,7 +8,7 @@ local StarterGui = game:GetService("StarterGui")
 local localPlayer = Players.LocalPlayer
 
 -- ESP Settings (Neon xanh dương)
-local espEnabled = true  -- Bắt đầu bật
+local espEnabled = true
 local espTable = {}
 
 local NEON_FILL = Color3.fromRGB(0, 255, 255)
@@ -56,38 +56,16 @@ local function createESP(character)
     espTable[player] = {highlight = highlight, billboard = billboard, textLabel = text}
 end
 
-local function removeESP()
-    for player, esp in pairs(espTable) do
+local function removeAllESP()
+    for _, esp in pairs(espTable) do
         if esp.highlight then esp.highlight:Destroy() end
         if esp.billboard then esp.billboard:Destroy() end
     end
     espTable = {}
 end
 
-local function updateNameTag(player, espData)
-    if not espEnabled or not espData or not espData.textLabel then return end
-    
-    local char = player.Character
-    if not char or not char:FindFirstChild("Humanoid") or not char:FindFirstChild("Head") then
-        espData.textLabel.Text = player.Name .. " [Chết]"
-        return
-    end
-    
-    local humanoid = char.Humanoid
-    local headPos = char.Head.Position
-    local rootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
-    local distance = rootPart and (headPos - rootPart.Position).Magnitude or 0
-    
-    local hp = math.floor(humanoid.Health)
-    local maxHp = humanoid.MaxHealth
-    local hpText = (hp > 0) and tostring(hp) .. "/" .. tostring(maxHp) or "Chết"
-    
-    espData.textLabel.Text = player.Name .. " [" .. math.floor(distance) .. " studs] ❤️ " .. hpText
-end
-
--- Áp dụng ESP khi bật
 local function refreshESP()
-    removeESP()
+    removeAllESP()
     if not espEnabled then return end
     
     for _, player in ipairs(Players:GetPlayers()) do
@@ -103,7 +81,23 @@ refreshESP()
 RunService.RenderStepped:Connect(function()
     if espEnabled then
         for player, esp in pairs(espTable) do
-            if player and esp then updateNameTag(player, esp) end
+            if player and esp then
+                local char = player.Character
+                if not char or not char:FindFirstChild("Humanoid") or not char:FindFirstChild("Head") then
+                    esp.textLabel.Text = player.Name .. " [Chết]"
+                else
+                    local humanoid = char.Humanoid
+                    local headPos = char.Head.Position
+                    local rootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    local distance = rootPart and (headPos - rootPart.Position).Magnitude or 0
+                    
+                    local hp = math.floor(humanoid.Health)
+                    local maxHp = humanoid.MaxHealth
+                    local hpText = (hp > 0) and tostring(hp) .. "/" .. tostring(maxHp) or "Chết"
+                    
+                    esp.textLabel.Text = player.Name .. " [" .. math.floor(distance) .. " studs] ❤️ " .. hpText
+                end
+            end
         end
     end
 end)
@@ -114,22 +108,7 @@ Players.PlayerAdded:Connect(function(player)
     end)
 end)
 
--- Toggle ESP bằng phím F
-UserInputService.InputBegan:Connect(function(input, gProcessed)
-    if gProcessed then return end
-    if input.KeyCode == Enum.KeyCode.F then
-        espEnabled = not espEnabled
-        if espEnabled then
-            refreshESP()
-            StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "Bật ESP Neon", Duration = 3})
-        else
-            removeESP()
-            StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "Tắt ESP", Duration = 3})
-        end
-    end
-end)
-
--- PHẦN GUI COPY TEXT (giữ nguyên, có scroll + drag)
+-- PHẦN GUI + SCROLLINGFRAME + DRAGGABLE + NÚT TOGGLE ESP + NÚT RESET POSITION
 
 local sg = Instance.new("ScreenGui")
 sg.Name = "ReportHelper"
@@ -170,7 +149,7 @@ title.TextSize = 22
 title.Parent = frame
 
 local bio = Instance.new("TextLabel", frame)
-bio.Size = UDim2.new(0.9, 0, 0, 160)
+bio.Size = UDim2.new(0.9, 0, 0, 140)
 bio.Position = UDim2.new(0.05, 0, 0, 45)
 bio.BackgroundTransparency = 1
 bio.TextColor3 = Color3.fromRGB(220, 220, 220)
@@ -188,18 +167,16 @@ Bước 1: Bấm vào logo Roblox bên trái trên góc màn hình
 Bước 2: Bấm vào Báo cáo
 
 Bước 3: Chọn chế độ tô sáng rồi chọn người muốn report
-(Dùng highlight neon + tên trên đầu để dễ nhận diện sus player)
 
 Bước 4: Nhớ phải đúng hành vi sai là bị banned ngược lại đừng có kêu
-(Chọn reason chính xác dựa trên vi phạm thật)
 
 Bước 5: Chọn text tương ứng với hành vi rồi report
-(Copy từ nút dưới đây, paste vào Description, thêm chi tiết nếu có)]]
+(Copy từ nút dưới, paste vào Description)]]
 bio.Parent = frame
 
 local scrollFrame = Instance.new("ScrollingFrame")
-scrollFrame.Size = UDim2.new(0.9, 0, 0, 300)
-scrollFrame.Position = UDim2.new(0.05, 0, 0, 210)
+scrollFrame.Size = UDim2.new(0.9, 0, 0, 280)
+scrollFrame.Position = UDim2.new(0.05, 0, 0, 200)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.BorderSizePixel = 0
 scrollFrame.ScrollBarThickness = 8
@@ -211,6 +188,54 @@ uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 uiListLayout.Padding = UDim.new(0, 10)
 uiListLayout.Parent = scrollFrame
 
+-- Nút Toggle ESP trong menu
+local espToggleBtn = Instance.new("TextButton")
+espToggleBtn.Size = UDim2.new(1, 0, 0, 50)
+espToggleBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+espToggleBtn.Text = "ESP Neon: BẬT"
+espToggleBtn.TextColor3 = Color3.new(1,1,1)
+espToggleBtn.Font = Enum.Font.SourceSansBold
+espToggleBtn.TextSize = 18
+espToggleBtn.Parent = scrollFrame
+
+local espCorner = Instance.new("UICorner", espToggleBtn)
+espCorner.CornerRadius = UDim.new(0, 10)
+
+espToggleBtn.Activated:Connect(function()
+    espEnabled = not espEnabled
+    if espEnabled then
+        refreshESP()
+        espToggleBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+        espToggleBtn.Text = "ESP Neon: BẬT"
+        StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "BẬT ESP Neon", Duration = 3})
+    else
+        removeAllESP()
+        espToggleBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+        espToggleBtn.Text = "ESP Neon: TẮT"
+        StarterGui:SetCore("SendNotification", {Title = "ESP", Text = "TẮT ESP", Duration = 3})
+    end
+end)
+
+-- Nút Reset Position (reset cả nút toggle và frame về giữa màn hình)
+local resetBtn = Instance.new("TextButton")
+resetBtn.Size = UDim2.new(1, 0, 0, 40)
+resetBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 255)
+resetBtn.Text = "Reset Position GUI"
+resetBtn.TextColor3 = Color3.new(1,1,1)
+resetBtn.Font = Enum.Font.SourceSansBold
+resetBtn.TextSize = 16
+resetBtn.Parent = scrollFrame
+
+local resetCorner = Instance.new("UICorner", resetBtn)
+resetCorner.CornerRadius = UDim.new(0, 10)
+
+resetBtn.Activated:Connect(function()
+    toggleBtn.Position = UDim2.new(0, 20, 0.5, -40)  -- Vị trí mặc định nút toggle
+    frame.Position = UDim2.new(0.5, -170, 0.5, -260)  -- Vị trí mặc định menu
+    StarterGui:SetCore("SendNotification", {Title = "Reset", Text = "Đã reset vị trí GUI về mặc định!", Duration = 3})
+end)
+
+-- Templates copy text
 local templates = {
     {"Avatar 18+ / Suggestive", "player dengan avatarus\nThis player is using an inappropriate avatar that is not suitable for\nCOPY"},
     {"Avatar Suggestive for Kids", "I am reporting this player having a suggestive avatar for kids\nRoblox's avatar appears inappropriate and makes the game\nCOPY"},
@@ -226,7 +251,7 @@ local templates = {
     {"Grooming / Inappropriate Dating", "This player is engaging in inappropriate dating and grooming behavior and is inappropriate for the game\nCOPY"}
 }
 
-local totalHeight = 0
+local totalHeight = 150  -- Bắt đầu từ nút toggle ESP + reset
 for i, data in ipairs(templates) do
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(1, 0, 0, 60)
@@ -257,7 +282,7 @@ end
 
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight + 20)
 
--- Toggle GUI (menu copy text)
+-- Toggle GUI
 local function toggleGUI()
     frame.Visible = not frame.Visible
     if frame.Visible then
@@ -278,48 +303,9 @@ UserInputService.InputBegan:Connect(function(input, gProcessed)
     end
 end)
 
--- DRAGGABLE
+-- DRAGGABLE (kéo nút toggle và frame)
 local dragging, dragInput, dragStart, startPos
 
 local function updateInput(input)
     local delta = input.Position - dragStart
-    local newPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    dragging.Parent.Position = newPos
-end
-
-local function startDrag(input, gui)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = gui
-        dragStart = input.Position
-        startPos = gui.Position
-        
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = nil
-            end
-        end)
-    end
-end
-
-toggleBtn.InputBegan:Connect(function(input)
-    startDrag(input, toggleBtn)
-end)
-
-title.InputBegan:Connect(function(input)
-    startDrag(input, frame)
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
-
-RunService.RenderStepped:Connect(function()
-    if dragging and dragInput then
-        updateInput(dragInput)
-    end
-end)
-
-frame.Visible = false
-print("Loaded: ESP NEON (toggle bằng F) + Report Text Copy (giống ảnh) + DRAGGABLE + SCROLLABLE")
+    local newPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y
